@@ -67,7 +67,7 @@ kind-delete-cluster: $(KIND) ## Delete kind cluster
 	@$(KIND) delete cluster --name $(KIND_NAME)
 
 .PHONY: kind-deploy-kyverno-operator
-kind-deploy-kyverno: $(HELM)
+kind-deploy-kyverno-operator: $(HELM)
 	@echo Install kyverno chart... >&2
 	@$(HELM) repo add nirmata https://nirmata.github.io/kyverno-charts 
 	@$(HELM) install kyverno-operator --namespace nirmata-kyverno-operator --create-namespace nirmata/kyverno-operator --set imagePullSecret.create=false
