@@ -5,7 +5,7 @@
 ############
 
 K8S_VERSION          ?= $(shell kubectl version --short | grep -i server | cut -d" " -f3 | cut -c2-)
-KIND_IMAGE           ?= kindest/node:v1.25.3
+KIND_IMAGE           ?= kindest/node:v1.25.2
 KIND_NAME            ?= kind
 USE_CONFIG           ?= standard
 
@@ -15,7 +15,7 @@ USE_CONFIG           ?= standard
 
 TOOLS_DIR                          := $(PWD)/.tools
 KIND                               := $(TOOLS_DIR)/kind
-KIND_VERSION                       := v1.25.3
+KIND_VERSION                       := v1.25.2
 HELM                               := $(TOOLS_DIR)/helm
 HELM_VERSION                       := v3.10.1
 KUTTL                              := $(TOOLS_DIR)/kubectl-kuttl
