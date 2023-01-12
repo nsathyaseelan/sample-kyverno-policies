@@ -19,7 +19,11 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3
       - name: Prepare environment
-        run: make kind-create-cluster kind-deploy-all
+        run: make kind-create-cluster 
+      - name: Prepare environment
+        run: make kind-deploy-kyverno-operator
+      - name: Prepare environment
+        run: make kind-deploy-kyverno
       - name: Wait for Kyverno to start
         run: sleep 60
       - name: Test with kuttl
