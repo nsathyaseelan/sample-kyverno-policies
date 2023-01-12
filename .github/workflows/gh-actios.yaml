@@ -1,9 +1,17 @@
 name: Conformance tests
+
 on:
+  push:
+    branches:
+      - 'main'
   pull_request:
     branches:
-      - 'test'
+      - 'main'
 
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+  
 jobs:
   run-conformance:
     runs-on: ubuntu-latest
