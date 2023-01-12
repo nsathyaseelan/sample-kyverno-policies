@@ -1,17 +1,9 @@
 .DEFAULT_GOAL: build-all
 
-############
-# DEFAULTS #
-############
-
 K8S_VERSION          ?= $(shell kubectl version --short | grep -i server | cut -d" " -f3 | cut -c2-)
 KIND_IMAGE           ?= kindest/node:v1.25.2
 KIND_NAME            ?= kind
 USE_CONFIG           ?= standard
-
-#########
-# TOOLS #
-#########
 
 TOOLS_DIR                          := $(PWD)/.tools
 KIND                               := $(TOOLS_DIR)/kind
@@ -21,7 +13,6 @@ HELM_VERSION                       := v3.10.1
 KUTTL                              := $(TOOLS_DIR)/kubectl-kuttl
 KUTTL_VERSION                      := v0.0.0-20230108220859-ef8d83c89156
 TOOLS                              := $(KIND) $(HELM) $(KUTTL)
-
 
 $(KIND):
 	@echo Install kind... >&2
@@ -36,10 +27,10 @@ $(KUTTL):
 	@GOBIN=$(TOOLS_DIR) go install github.com/kyverno/kuttl/cmd/kubectl-kuttl@$(KUTTL_VERSION)
 
 .PHONY: install-tools
-install-tools: $(TOOLS) ## Install tools
+install-tools: $(TOOLS)
 
 .PHONY: clean-tools
-clean-tools: ## Remove installed tools
+clean-tools: 
 	@echo Clean tools... >&2
 	@rm -rf $(TOOLS_DIR)
 
@@ -52,17 +43,14 @@ test-kuttl: $(KUTTL) ## Run kuttl tests
 	@echo Running kuttl tests... >&2
 	@$(KUTTL) test --config ./tests/kuttl-test/kuttl-test.yaml
 
-########
-# KIND #
-########
-
+## Create kind cluster
 .PHONY: kind-create-cluster
-kind-create-cluster: $(KIND) ## Create kind cluster
+kind-create-cluster: $(KIND) 
 	@echo Create kind cluster... >&2
 	@$(KIND) create cluster --name $(KIND_NAME) 
-
+## Delete kind cluster
 .PHONY: kind-delete-cluster
-kind-delete-cluster: $(KIND) ## Delete kind cluster
+kind-delete-cluster: $(KIND) 
 	@echo Delete kind cluster... >&2
 	@$(KIND) delete cluster --name $(KIND_NAME)
 
