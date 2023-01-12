@@ -1,7 +1,7 @@
 apiVersion: kyverno.io/v1
 kind: ClusterPolicy
 metadata:
-  name: rrrrrrequire-requests-limits
+  name: require-requests-limits
 status:
   conditions:
   - reason: Succeeded
