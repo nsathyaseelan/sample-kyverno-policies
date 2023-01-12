@@ -50,7 +50,7 @@ clean-tools: ## Remove installed tools
 .PHONY: test-kuttl
 test-kuttl: $(KUTTL) ## Run kuttl tests
 	@echo Running kuttl tests... >&2
-	@$(KUTTL) test tests/kuttl-test/kuttl-test.yaml
+	@$(KUTTL) test --config ./tests/kuttl-test/kuttl-test.yaml
 
 ########
 # KIND #

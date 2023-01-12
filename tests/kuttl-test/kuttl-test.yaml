@@ -1,5 +1,5 @@
 apiVersion: kuttl.dev/v1beta1
 kind: TestSuite
 testDirs:
-- ./best-practices/
+- ./tests/kuttl-test/kuttl-test.yaml
 startKIND: false
