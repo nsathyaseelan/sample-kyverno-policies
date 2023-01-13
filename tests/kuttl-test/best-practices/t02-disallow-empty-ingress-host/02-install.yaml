@@ -1,17 +1,12 @@
-apiVersion: networking.k8s.io/v1
-kind: Ingress
-metadata:
-  name: minimal-ingress
-  annotations:
-    nginx.ingress.kubernetes.io/rewrite-target: /
-spec:
-  rules:
-  - http:
-      paths:
-      - path: /testpath
-        pathType: Prefix
-        backend:
-          service:
-            name: test
-            port:
-              number: 80
+apiVersion: kuttl.dev/v1beta1
+kind: TestStep
+commands:
+- script: |
+    if kubectl apply -f ingress.yaml
+    then 
+      echo "Tested failed. Resource was allowed."
+      exit 1 
+    else 
+      echo "Test succeeded. Resource was blocked."
+      exit 0
+    fi
