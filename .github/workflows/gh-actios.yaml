@@ -1,4 +1,4 @@
-name: Conformance tests
+name: Kuttl tests
 
 on:
   push:
@@ -13,7 +13,7 @@ concurrency:
   cancel-in-progress: true
   
 jobs:
-  run-conformance:
+  run-e2etest:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
