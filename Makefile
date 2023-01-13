@@ -48,12 +48,17 @@ test-kuttl: $(KUTTL) ## Run kuttl tests
 kind-create-cluster: $(KIND) 
 	@echo Create kind cluster... >&2
 	@$(KIND) create cluster --name $(KIND_NAME) 
+
 ## Delete kind cluster
 .PHONY: kind-delete-cluster
 kind-delete-cluster: $(KIND) 
 	@echo Delete kind cluster... >&2
 	@$(KIND) delete cluster --name $(KIND_NAME)
 
+###############
+## TODO ##
+# BUild image and update values.yam, to install kyverno and kyverno operator.
+###############
 .PHONY: kind-deploy-kyverno-operator
 kind-deploy-kyverno-operator: $(HELM)
 	@echo Install kyverno chart... >&2
@@ -64,7 +69,7 @@ kind-deploy-kyverno-operator: $(HELM)
 kind-deploy-kyverno: $(HELM) 
 	@echo Install kyverno chart... >&2
 	@$(HELM) repo add nirmata https://nirmata.github.io/kyverno-charts
-	@$(HELM) install kyverno --namespace nirmata-kyverno --create-namespace nirmata/kyverno --set image.pullSecrets.create=false
+	@$(HELM) install kyverno --namespace nirmata-kyverno --create-namespace nirmata/kyverno --set licenseManager.licenseKey="RAZduwNI821LZFMWOgsMKDiVIg8dEOP3mFUFu3ukYxN8N/H3Qu1kNvw7jdK85OuFFWCbF+GQtkeF0ETzfS45/HuawTKz+W5medZmktkX2mESxaQz5fJ2uMdPq+7PZD7XW4aRfVQDDOobAHgL8HFFRb5Pi+sadWv8JQGwo3TS1udS0x9EVt2EjUAAAajpYJKel7KFxuavBILuNSTpIneRMZbHjEJgxAMQPNShhCrso+gt9tu1nWYSZIdRlv+Y9V+GfLLn6yjVN43yiK+gskdR+9TncBnHqpPPbrHeXD7QS5o=",licenseManager.apiKey="ovQFlCiQqmPgBPS6FBbULjLGwDuDz/UvVs8z95KUtO4IMzVhL2aDPUiU8WlLim1addPyw9Rz5ytYmbnSDwU2zQ==",licenseManager.callHomeServer="staging.nirmata.co"
 
 .PHONY: kind-deploy-kyverno-policies
 kind-deploy-kyverno-policies: 
