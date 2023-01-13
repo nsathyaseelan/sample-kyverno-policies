@@ -48,12 +48,17 @@ test-kuttl: $(KUTTL) ## Run kuttl tests
 kind-create-cluster: $(KIND) 
 	@echo Create kind cluster... >&2
 	@$(KIND) create cluster --name $(KIND_NAME) 
+
 ## Delete kind cluster
 .PHONY: kind-delete-cluster
 kind-delete-cluster: $(KIND) 
 	@echo Delete kind cluster... >&2
 	@$(KIND) delete cluster --name $(KIND_NAME)
 
+###############
+## TODO ##
+# BUild image and update values.yam, to install kyverno and kyverno operator.
+###############
 .PHONY: kind-deploy-kyverno-operator
 kind-deploy-kyverno-operator: $(HELM)
 	@echo Install kyverno chart... >&2
